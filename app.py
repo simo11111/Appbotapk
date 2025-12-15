@@ -825,7 +825,90 @@ class Proxy:
                     except:
                         pass
                 
-
+                if   b"/DIAM" in dataS:
+                    try:
+                        threading.Thread(target=self.adding_daimond).start()
+                        self.client1200.send(bytes.fromhex(f"120000014808{self.EncryptedPlayerid}101220022abb0208{self.EncryptedPlayerid}10{self.EncryptedPlayerid}2293010a5b6666376635305d5b635d5b625de29481e29481e29481e29481e29481e29481e29481e29481e29481e29481e29481e294810a0a220a5b3030464630305d5b635d5b625d2d20444f4e45204144442031304b204449414d4f4e442e0a0a220a5b6666376635305d5b635d5b625de29481e29481e29481e29481e29481e29481e29481e29481e29481e29481e29481e294810a28a083cabd064a250a0b4f5554e385a4414c56494e10e7b290ae0320d20128c1b7f8b103420737526164616121520261726a640a5e68747470733a2f2f6c68332e676f6f676c6575736572636f6e74656e742e636f6d2f612f414367386f634a614d4363556f6c4355397148576c6c2d79506e76516d3354782d304630304d30596a633350437737326f7a44503d7339362d63100118017200"))
+                    except:
+                        pass
+                
+                if b"/record" in dataS:
+                    recode_packet = True
+                if b"/start" in dataS:
+                    self.remote0500.send(bytes.fromhex(packet_start))
+                if '1200' in dataS.hex()[0:4] and b'/add' in dataS:    
+                        try:
+                            i = re.split('/add', str(dataS))[1]
+                            print(i)                        
+                            if '***' in i:
+                            	i = i.replace('***', '106')            	
+                            iddd = str(i).split('(\\x')[0]   	            
+                            id = self.Encrypt_ID(iddd)
+                            self.fake_friend(self.client0500, id)
+                            self.client1200.send(bytes.fromhex(f"12000000f708{self.EncryptedPlayerid}101220022aea0108{self.EncryptedPlayerid}10{self.EncryptedPlayerid}22430a5b625d5b695d5b635d5b3763666330305d202d20446f6e652041444420504c4159455220210a202d20456e6a6f790a202d204279203a20434f444558205445414d0a28a083cabd064a250a0b4f5554e385a4414c56494e10e7b290ae0320d20128c1b7f8b103420737526164616121520261726a640a5e68747470733a2f2f6c68332e676f6f676c6575736572636f6e74656e742e636f6d2f612f414367386f634a614d4363556f6c4355397148576c6c2d79506e76516d3354782d304630304d30596a633350437737326f7a44503d7339362d63100118017200"))
+                        except:
+                            pass
+                #CHAT FEATURES!
+                if   b'/spm' in dataS:
+                    	spam_chat = dataC
+                    	try:
+                    	           for i in range(1):
+                    	               for _ in range(5):
+                    	                   remote.send(spam_chat)
+                    	                   time.sleep(0.04)
+                    	                   time.sleep(0.2)
+                    	           threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[B][C][FF0000] - Spam message Done ", 0.3)).start()
+                    	except:
+                    	    pass
+                if b"/region+" in dataS:
+                             parts = dataS.split(b"/region+")
+                             user_id = parts[1].split(b"\x28")[0].decode("utf-8")
+                             b = get_player_info(user_id)
+                             reg = b["region"]
+                             nick = b["nickname"]
+                             threading.Thread(target=send_msg, args=(client, dataS.hex(), reg, 0.2)).start()
+                             threading.Thread(target=send_msg, args=(client, dataS.hex(), nick, 0.2)).start()
+                if b"/LAG" in dataS:
+                    for i in range (99999999999999):
+                                threading.Thread(target=send_msg, args=(client, dataS.hex(), "[b][c][FBB117]- ∫  BOT-X V6 START FUCKING YOUR ACCOUNT!!\n\n/FUCK YOUUㅤㅤ", 1.0)).start()
+                                threading.Thread(target=send_msg, args=(client, dataS.hex(), "[b][c][FBB117]- ∫ FUCK FUCK FUCK\n\n/FUCK YOUU\n\nFUCK FUCK", 1.0)).start()
+                                time.sleep(0.01)
+                #STYLLLLLLLLLE
+                
+                if b"/7old" in dataS:
+                    threading.Thread(target=self.YearsOld7).start()
+                if b"/6old" in dataS:
+                    threading.Thread(target=self.YearsOld6).start()
+                if b"/5old" in dataS:
+                    threading.Thread(target=self.YearsOld5).start()
+                if b"@FOX-RR" in dataS:
+                        idd = (bytes.fromhex(re.findall(r'40464f582d52(.*?)28', dataS.hex())[0])).decode('utf-8', errors='ignore')
+                        ress = f"[C][B][FF0000]{idd}"
+                        threading.Thread(target=send_msg, args=(client, dataS.hex(), ress, 0.2)).start()              
+                if b"@FOX-GG" in dataS:
+                        idd = (bytes.fromhex(re.findall(r'40464f582d47(.*?)28', dataS.hex())[0])).decode('utf-8')
+                        ress = f"[C][B😎][00FF00]{idd}"
+                        threading.Thread(target=send_msg, args=(client, dataS.hex(), ress, 0.2)).start()                   
+                if b"@FOX-YY" in dataS:
+                        idd = (bytes.fromhex(re.findall(r'40464f582d59(.*?)28', dataS.hex())[0])).decode('utf-8')
+                        ress = f"[C][B😎][FFFF00]{idd}"
+                        threading.Thread(target=send_msg, args=(client, dataS.hex(), ress, 0.2)).start()
+                if b"@FOX-VV" in dataS:
+                        idd = (bytes.fromhex(re.findall(r'40464f582d56(.*?)28', dataS.hex())[0])).decode('utf-8')
+                        ress = f"[C][B😎][2ECC71]{idd}"
+                        threading.Thread(target=send_msg, args=(client, dataS.hex(), ress, 0.2)).start()
+                if b"@FOX-BB" in dataS:
+                        idd = (bytes.fromhex(re.findall(r'40464f582d42(.*?)28', dataS.hex())[0])).decode('utf-8') 
+                        ress = f"[C][B😎][0000FF]{idd}"
+                        threading.Thread(target=send_msg, args=(client, dataS.hex(), ress, 0.2)).start() 
+                if b"@FOX-OO" in dataS:
+                        idd = (bytes.fromhex(re.findall(r'40464f582d4f(.*?)28', dataS.hex())[0])).decode('utf-8')
+                        ress = f"[C][B😎][FFA500]{idd}"
+                        threading.Thread(target=send_msg, args=(client, dataS.hex(), ress, 0.2)).start()
+                if b"@FOX-PP" in dataS:
+                        idd = (bytes.fromhex(re.findall(r'40464f582d4f(.*?)28', dataS.hex())[0])).decode('utf-8')
+                        ress = f"[C][B😎][FF1493]{idd}"
+                        threading.Thread(target=send_msg, args=(client, dataS.hex(), ress, 0.2)).start()
                 if b"@FOX-GY" in dataS:
                         idd = (bytes.fromhex(re.findall(r'40464f582d4f(.*?)28', dataS.hex())[0])).decode('utf-8')
                         ress = f"[C][B😎][808080]{idd}"
